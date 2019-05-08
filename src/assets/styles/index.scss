@@ -1,0 +1,48 @@
+$appBackgroundColor:#F0F0F0;
+$appTitleBackColor:#000;
+
+*{
+    margin: 0;
+    padding: 0;   
+}
+body{
+     font-family: "Comic Sans MS", cursive, sans-serif !important;
+     font-size:100% !important;
+     user-select: none;
+}
+
+h1 {
+    font-size:2.5em;
+}
+h2 {
+    font-size:1.875em;
+}
+p {
+    font-size:0.875em;
+}
+#app{
+    height: 100vh;
+    width: 100vw;       
+}
+.flex{
+    display: flex;
+    display: -webkit-flex;
+}
+.pointer{
+    cursor: pointer;
+}
+.center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.italic {
+    font-style:italic;
+}
+.routerLink{
+    color: #000;
+    text-decoration: none;
+}
+a.routerLink:hover {
+    color: #000;
+}
