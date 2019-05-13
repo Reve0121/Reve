@@ -40,9 +40,9 @@ p {
     font-style:italic;
 }
 .routerLink{
-    color: #000;
+    color: $appTitleBackColor;
     text-decoration: none;
 }
 a.routerLink:hover {
-    color: #000;
+    color: $appTitleBackColor;
 }

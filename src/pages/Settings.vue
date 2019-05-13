@@ -10,7 +10,7 @@
       </CellGroup>
     </Card>
     <div class="settings-body">
-      <router-view></router-view>
+      <router-view/>
     </div>
   </div>
 </template>
