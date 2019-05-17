@@ -27,6 +27,6 @@ export default {
 }
 .settings-body {
   width: 85%;
-  background-color: #f5f5f5;
+  background-color:#0121;
 }
 </style>
