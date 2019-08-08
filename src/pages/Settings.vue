@@ -9,7 +9,7 @@
         <Cell title="Security" to="/settings/security"><span slot="arrow"></span></Cell>
       </CellGroup>
     </Card>
-    <div class="settings-body">
+    <div class="settings-body defaultPadding">
       <router-view/>
     </div>
   </div>
@@ -21,12 +21,13 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .settings-menu {
   width: 15%;
+  min-width:170px;
 }
 .settings-body {
-  width: 85%;
-  background-color:#0121;
+  width: 85%; 
 }
+
 </style>

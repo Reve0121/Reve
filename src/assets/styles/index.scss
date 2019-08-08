@@ -1,6 +1,7 @@
 $appBackgroundColor:#0121;
 $appTitleBackColor:#000;
-
+$defaultPadding:10px 15px;
+/*************self-defined style***********************/
 *{
     margin: 0;
     padding: 0;   
@@ -35,6 +36,7 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 .italic {
     font-style:italic;
@@ -45,4 +47,18 @@ p {
 }
 a.routerLink:hover {
     color: $appTitleBackColor;
+}
+.defaultPadding{
+    padding:$defaultPadding;
+}
+.titleBackgroundColor{
+    background-color: $appBackgroundColor;
+}
+
+/****************iview component style**************************/
+.ivu-card-head{
+    background-color: $appBackgroundColor;
+}
+.ivu-card-body{
+    padding: 0 !important;
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-item pointer center">
+  <div class="menu-item pointer">
     <Dropdown>
       <Icon type="md-person"/>
       <Icon type="md-arrow-dropdown"/>
