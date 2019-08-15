@@ -8,9 +8,9 @@ import tools from '@/common/tools'
 import appServices from '@/common/services/appServices'
 
 //全局注册公用方法
-Vue.prototype.$tools=tools;
-Vue.prototype.$get=appServices.get;
-Vue.prototype.$post=appServices.post;
+Vue.prototype.$tools = tools;               //this.$tools
+Vue.prototype.$get = appServices.get;       //this.$get
+Vue.prototype.$post = appServices.post;     //this.$post
 
 Vue.use(iView);
 

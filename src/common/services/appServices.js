@@ -1,9 +1,9 @@
 import { appAxios } from './axios'
-import urlContants from './urlContants'
 
+const baseURL = process.env.BASE_URL;
 const appServices = {
     post(url, data) {
-        let requestURL = urlContants.baseURL + url;
+        let requestURL =baseURL + url;
         let params = data || '';
         return new Promise((resolve, rejects) => {
             appAxios.post(requestURL, params)
@@ -14,8 +14,8 @@ const appServices = {
                 })
         })
     },
-    get(url, data) {
-        let requestURL = urlContants.baseURL + url;
+    get(url, data) {                    
+        let requestURL = baseURL + url;     
         let params = data || '';
         return new Promise((resolve, rejects) => {
             appAxios.get(requestURL, { params: params })

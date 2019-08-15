@@ -5,17 +5,20 @@
     <div class="flex">
       <div class="user-profile">
         <Form ref="userProfile" :model="userProfile" :rules="rulesForProfile" label-position="top">
-          <FormItem label="Name" prop="name">
-            <Input v-model="userProfile.name" />
+          <FormItem label="First Name" prop="firstName">
+            <Input v-model="userProfile.firstName" />
           </FormItem>
-          <FormItem label="Tel" prop="tel">
-            <Input v-model="userProfile.tel" />
+          <FormItem label="Last Name" prop="lastName">
+            <Input v-model="userProfile.lastName" />
           </FormItem>
-          <FormItem label="Email" prop="email">
-            <Input v-model="userProfile.email" />
+          <FormItem label="Phone" prop="phone">
+            <Input v-model="userProfile.phone" />
+          </FormItem>
+          <FormItem label="EmailAddress" prop="emailAddress">
+            <Input v-model="userProfile.emailAddress" />
           </FormItem>
           <FormItem label="Address" prop="address">
-            <Cascader :data="pcasData"></Cascader>
+            <!-- <Cascader :data="pcasData"></Cascader> -->
           </FormItem>
           <FormItem>
             <Button type="primary" @click="handleSubmit('userProfile')">Update Profile</Button>
@@ -34,15 +37,21 @@ export default {
     var validateName = (rule, value, callback) => {
       let name = this.$tools.trimString(value);
       if (!name) {
-        callback(new Error("Name cannot be empty"));
+        callback(new Error("This name cannot be empty"));
       } else {
         callback();
       }
     };
-    var validateTel = (rule, value, callback) => {
-      let reg = /^1[3|4|5|7|8]\d{9}$/;
-      if (!reg.test(value)) {
-        callback(new Error("Incorrect tel format"));
+    var validatePhone = (rule, value, callback) => {
+      // let reg = /^1[3|4|5|7|8]\d{9}$/;
+      // if (!reg.test(value)) {
+      //   callback(new Error("Incorrect phone format"));
+      // } else {
+      //   callback();
+      // }
+      let phone = this.$tools.trimString(value);
+      if (!phone) {
+        callback(new Error("Incorrect phone format"));
       } else {
         callback();
       }
@@ -50,30 +59,62 @@ export default {
     return {
       pcasData: "",
       userProfile: {
-        name: "reve",
-        tel: 15872105496,
-        email: "1234562@qwe.com",
-        address: ""
+        firstName: "",
+        modifiedDate: "",
+        companyName: "",
+        customerID: 0,
+        emailAddress: "",
+        lastName: "",
+        middleName: "",
+        nameStyle: false,
+        passwordSalt: "",
+        phone: "",
+        rowguid: "",
+        salesPerson: "",
+        suffix: null,
+        title: null
       },
       rulesForProfile: {
-        name: [{ required: true, validator: validateName, trigger: "blur" }],
-        tel: [{ required: true, validator: validateTel, trigger: "blur" }],
-        email: [
-          { required: true, message: "Email cannot be empty", trigger: "blur" },
-          { type: "email", message: "Incorrect email format", trigger: "blur" }
+        firstName: [
+          { required: true, validator: validateName, trigger: "blur" }
+        ],
+        lastName: [
+          { required: true, validator: validateName, trigger: "blur" }
+        ],
+        phone: [{ required: true, validator: validatePhone, trigger: "blur" }],
+        emailAddress: [
+          {
+            required: true,
+            message: "EmailAddress cannot be empty",
+            trigger: "blur"
+          },
+          {
+            type: "email",
+            message: "Incorrect emailAddress format",
+            trigger: "blur"
+          }
         ],
         address: []
       }
     };
   },
-  created: async function() {
-   this.pcasData = await this.readTextFile();    
+  mounted: async function() {
+    this.getCustomerInfo();
   },
   methods: {
     readTextFile: async function() {
-       let filePath = "/static/pcas-code.json";
-       let resData= await this.$get(filePath);
-       console.log(resData);
+      let filePath = "/static/pcas-code.json";
+      let resData = await this.$get(filePath);
+      console.log(resData);
+    },
+    getCustomerInfo: async function() {
+      let api = "/api/customer/getCustomerById/21";
+      let response = await this.$get(api);
+      if (response.isSuccess) {
+        this.userProfile = response.data;
+      } else {
+        console.log(response);
+      }
     },
     handleSubmit(name) {
       this.$refs[name].validate(valid => {

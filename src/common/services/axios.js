@@ -11,7 +11,7 @@ const appAxios = axios.create({
 //请求拦截器
 appAxios.interceptors.request.use(
     //发送请求前的处理
-    (config) => {
+    (config) => {           
         return config;
     },
     //若请求错误，则返回错误信息
@@ -23,10 +23,7 @@ appAxios.interceptors.request.use(
 appAxios.interceptors.response.use(
     (response) => {
         if (response.status == 200 && response.statusText == "OK") {
-            return {
-                isSuccess: true,
-                data: response.data
-            }
+            return response.data;
         }
 
     },
