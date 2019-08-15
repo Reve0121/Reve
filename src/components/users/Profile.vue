@@ -26,7 +26,7 @@
         </Form>
       </div>
       <div class="user-avatar">avatar</div>
-    </div>
+    </div>   
   </div>
 </template>
 
@@ -57,7 +57,7 @@ export default {
       }
     };
     return {
-      pcasData: "",
+      pcasData: "",      
       userProfile: {
         firstName: "",
         modifiedDate: "",
@@ -108,18 +108,24 @@ export default {
       console.log(resData);
     },
     getCustomerInfo: async function() {
+      this.$Spin.show();
       let api = "/api/customer/getCustomerById/21";
       let response = await this.$get(api);
+      setTimeout(() => {
+        this.$Spin.hide();
+      }, 3000);
       if (response.isSuccess) {
         this.userProfile = response.data;
       } else {
-        console.log(response);
+        this.$Message.error(response.message);
       }
+      
     },
     handleSubmit(name) {
       this.$refs[name].validate(valid => {
         this.$Spin.show();
         if (valid) {
+          console.log(this.userProfile);
           setTimeout(() => {
             this.$Message.success("Success!");
             this.$Spin.hide();
