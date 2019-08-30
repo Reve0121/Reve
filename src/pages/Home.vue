@@ -2,7 +2,7 @@
   <div>
     <Menu v-bind:menus="menus"></Menu>
     <p>Home page</p>
-    <Rate v-model="value"/>
+    <el-rate v-model="value"></el-rate>
     <p>{{value}}</p>
   </div>
 </template>

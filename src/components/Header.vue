@@ -2,50 +2,52 @@
   <div class="header flex">
     <div class="header-logo pointer center">
       <router-link class="routerLink" to="/home">
-        <img src="../assets/images/Reve.png">
+        <img src="../assets/images/Reve.png" />
       </router-link>
       <router-link class="routerLink" to="/home">
         <h2 class="menu-item">Reve</h2>
       </router-link>
-    </div>   
+    </div>
     <div class="header-menu flex">
       <div class="menu-item pointer center">
-        <Dropdown @on-click="switchLanguage">
-          <Icon type="md-globe"/>
-          <Icon type="md-arrow-dropdown"/>
-          <DropdownMenu slot="list" style="min-width:auto;">
-            <DropdownItem name="简体中文">简体中文</DropdownItem>
-            <DropdownItem name="English">English</DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
+        <el-dropdown @command="switchLanguage">
+          <span>
+            {{language}}
+            <i class="el-icon-caret-bottom"></i>
+          </span>
+          <el-dropdown-menu slot="dropdown" style="min-width:auto;">
+            <el-dropdown-item command="简体中文">简体中文</el-dropdown-item>
+            <el-dropdown-item command="English">English</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
       </div>
       <div class="menu-item pointer center">
-        <Login v-if="false"></Login>
-        <Avatar v-bind:userName="userName"></Avatar>
+        <Signin ></Signin>
+        <Avatar v-if="false" v-bind:userName="userName"></Avatar>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
-import Login from "@/components/Login";
-import Avatar from "@/components/Avatar"
+import Signin from "@/components/Signin";
+import Avatar from "@/components/Avatar";
 
 export default {
   name: "Header",
   data() {
     return {
-      userName:"YoYo"
+      userName: "YoYo",
+      language: "English"
     };
   },
-  components: {    
-    Login,
+  components: {
+    Signin,
     Avatar
   },
   methods: {
     switchLanguage: function(item) {
-      console.log(item);
+      this.language = item;
     }
   }
 };

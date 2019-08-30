@@ -1,36 +1,52 @@
 <template>
-  <div>
+  <div v-loading.fullscreen.lock="fullscreenLoading">
     Public profile
-    <Divider size="small" />
+    <el-divider size="small"></el-divider>
     <div class="flex">
       <div class="user-profile">
-        <Form ref="userProfile" :model="userProfile" :rules="rulesForProfile" label-position="top">
-          <FormItem label="First Name" prop="firstName">
-            <Input v-model="userProfile.firstName" />
-          </FormItem>
-          <FormItem label="Last Name" prop="lastName">
-            <Input v-model="userProfile.lastName" />
-          </FormItem>
-          <FormItem label="Phone" prop="phone">
-            <Input v-model="userProfile.phone" />
-          </FormItem>
-          <FormItem label="EmailAddress" prop="emailAddress">
-            <Input v-model="userProfile.emailAddress" />
-          </FormItem>
-          <FormItem label="Address" prop="address">
-            <!-- <Cascader :data="pcasData"></Cascader> -->
-          </FormItem>
-          <FormItem>
-            <Button type="primary" @click="handleSubmit('userProfile')">Update Profile</Button>
-          </FormItem>
-        </Form>
+        <el-form
+          ref="userProfile"
+          :model="userProfile"
+          :rules="rulesForProfile"
+          label-position="top"
+        >
+          <el-form-item label="First Name" prop="firstName">
+            <el-input v-model="userProfile.firstName"></el-input>
+          </el-form-item>
+          <el-form-item label="Last Name" prop="lastName">
+            <el-input v-model="userProfile.lastName"></el-input>
+          </el-form-item>
+          <el-form-item label="Phone" prop="phone">
+            <el-input v-model="userProfile.phone"></el-input>
+          </el-form-item>
+          <el-form-item label="Email" prop="emailAddress">
+            <el-input v-model="userProfile.emailAddress"></el-input>
+          </el-form-item>
+          <el-form-item label="Address" prop="address">
+            <el-cascader
+              class="cascader"
+              :options="pcasData"
+              v-model="userProfile.address"
+              clearable
+            >
+              <template slot-scope="{node,data}">
+                <span>{{data.label}}</span>
+                <span v-if="!node.isLeaf">({{ data.children.length }})</span>
+              </template>
+            </el-cascader>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="handleSubmit('userProfile')">Update Profile</el-button>
+          </el-form-item>
+        </el-form>
       </div>
       <div class="user-avatar">avatar</div>
-    </div>   
+    </div>
   </div>
 </template>
 
 <script>
+const PcasCodes = require("../../../static/pcas-code.json");
 export default {
   name: "Profile",
   data: function() {
@@ -56,8 +72,12 @@ export default {
         callback();
       }
     };
+    let pcasDataTemp = this.$tools.replaceAll(PcasCodes, "name", "label");
+    pcasDataTemp = this.$tools.replaceAll(pcasDataTemp, "code", "value");
+
     return {
-      pcasData: "",      
+      fullscreenLoading: false,
+      pcasData: pcasDataTemp,
       userProfile: {
         firstName: "",
         modifiedDate: "",
@@ -72,7 +92,8 @@ export default {
         rowguid: "",
         salesPerson: "",
         suffix: null,
-        title: null
+        title: null,
+        address: ""
       },
       rulesForProfile: {
         firstName: [
@@ -94,47 +115,44 @@ export default {
             trigger: "blur"
           }
         ],
-        address: []
+        address: [
+          {
+            required: true,
+            message: "Address cannot be empty",
+            trigger: "change"
+          }
+        ]
       }
     };
   },
-  mounted: async function() {
-    this.getCustomerInfo();
+  mounted: function() {
+    // this.getCustomerInfo();
   },
   methods: {
-    readTextFile: async function() {
-      let filePath = "/static/pcas-code.json";
-      let resData = await this.$get(filePath);
-      console.log(resData);
-    },
     getCustomerInfo: async function() {
-      this.$Spin.show();
+      this.fullscreenLoading = true;
       let api = "/api/customer/getCustomerById/21";
       let response = await this.$get(api);
       setTimeout(() => {
-        this.$Spin.hide();
+        this.fullscreenLoading = false;
       }, 3000);
       if (response.isSuccess) {
         this.userProfile = response.data;
       } else {
-        this.$Message.error(response.message);
+        this.$message.error(response.message);
       }
-      
     },
     handleSubmit(name) {
       this.$refs[name].validate(valid => {
-        this.$Spin.show();
         if (valid) {
+          this.fullscreenLoading = true;
           console.log(this.userProfile);
           setTimeout(() => {
-            this.$Message.success("Success!");
-            this.$Spin.hide();
+            this.$message.success("Success!");
+            this.fullscreenLoading = false;
           }, 2000);
         } else {
-          setTimeout(() => {
-            this.$Message.error("Fail!");
-            this.$Spin.hide();
-          }, 2000);
+          this.$message.error("Fail!");
         }
       });
     }
@@ -147,5 +165,8 @@ export default {
 }
 .user-avatar {
   width: 40%;
+}
+.cascader {
+  width: 100%;
 }
 </style>

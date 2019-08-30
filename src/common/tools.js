@@ -14,6 +14,10 @@ class Tools {
         } else {
             return "";
         }
+    };
+    replaceAll(source,target, replaceStr) {
+        let reg = eval(`/${target}/g`);
+        return JSON.parse(JSON.stringify(source).replace(reg, replaceStr));
     }
 }
 export default new Tools() 

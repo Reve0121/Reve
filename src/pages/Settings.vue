@@ -1,14 +1,25 @@
 <template>
   <div class="flex">
-    <Card class="settings-menu" title="Personal settings" dis-hover>
-      <CellGroup>
-        <Cell title="Profile" to="/settings/profile">
-          <span slot="arrow"></span>
-        </Cell>
-        <Cell title="Account" to="/settings/account"><span slot="arrow"></span></Cell>        
-        <Cell title="Security" to="/settings/security"><span slot="arrow"></span></Cell>
-      </CellGroup>
-    </Card>
+    <el-card class="settings-menu" shadow="never">
+      <div slot="header">
+        <p>Personal settings</p>
+      </div>
+      <div>
+        <router-link class="routerLink" to="/settings/profile">
+          <p>Profile</p>
+        </router-link>
+      </div>
+      <div>
+        <router-link class="routerLink" to="/settings/account">
+          <p>Account</p>
+        </router-link>
+      </div>
+      <div>
+        <router-link class="routerLink" to="/settings/security">
+          <p>Security</p>
+        </router-link>
+      </div>
+    </el-card>
     <div class="settings-body defaultPadding">
       <router-view/>
     </div>
@@ -23,11 +34,10 @@ export default {
 
 <style lang="scss">
 .settings-menu {
-  width: 15%;
-  min-width:170px;
+  width: 18%;
+  min-width: 200px;
 }
 .settings-body {
-  width: 85%; 
+  width: 82%;
 }
-
 </style>
