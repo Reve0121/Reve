@@ -126,7 +126,7 @@ export default {
     };
   },
   mounted: function() {
-    // this.getCustomerInfo();
+    this.getCustomerInfo();
   },
   methods: {
     getCustomerInfo: async function() {

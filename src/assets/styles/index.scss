@@ -29,6 +29,11 @@ p {
     display: flex;
     display: -webkit-flex;
 }
+.flex-column{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+}
 .pointer{
     cursor: pointer;
 }
@@ -54,6 +59,16 @@ a.routerLink:hover {
 }
 .titleBackgroundColor{
     background-color: $appBackgroundColor;
+}
+.button{
+    color: #fff;
+    background-color: #000000;
+    font-size: 22px;
+    border-radius: 5px;
+    line-height: 32px;
+    padding: 8px 20px;
+    cursor: pointer;
+    user-select: none;
 }
 
 /****************iview component style**************************/

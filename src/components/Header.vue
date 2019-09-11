@@ -22,8 +22,8 @@
         </el-dropdown>
       </div>
       <div class="menu-item pointer center">
-        <Signin ></Signin>
-        <Avatar v-if="false" v-bind:userName="userName"></Avatar>
+        <Signin v-if="false"></Signin>
+        <Avatar v-bind:userName="userName"></Avatar>
       </div>
     </div>
   </div>
