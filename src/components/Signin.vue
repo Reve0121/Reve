@@ -58,7 +58,7 @@ export default {
     },
     asyncLogin: async function() {
       this.isModalLoading = true;
-      let randomNum = this.$tools.random(1, 10);
+      let randomNum = this.$tools.randomNum(1, 10);
       console.log(randomNum);
       setTimeout(() => {
         this.isModalLoading = false;

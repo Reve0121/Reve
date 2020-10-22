@@ -29,3 +29,4 @@ update file on github to test vs code pull
 
 test the refresh button on the bottom which after the branch infomation in VS Code
 
+test the refresh button when update two file and commit one of the file  
