@@ -21,5 +21,5 @@ npm run build --report
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 2020.10.22
-
-ç»ƒä¹ ä½¿ç”¨gitå°ä¹Œé¾Ÿåˆå¹¶ä»£ç åˆ†æ”¯---å½“å‰masteråˆ†æ”¯
+update dev branch
+Á·Ï°Ê¹ÓÃgitĞ¡ÎÚ¹êºÏ²¢´úÂë·ÖÖ§---µ±Ç°master·ÖÖ§
