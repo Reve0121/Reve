@@ -22,11 +22,6 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 2020.10.22
 update dev branch
-练习使用git小乌龟合并代码分支---当前master分支
 
-
-
-2020.10.22
-
-本地仓库dev分支直接合并至远程master 分支？
+update master by VS Code
 
