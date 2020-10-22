@@ -1,5 +1,10 @@
 class Tools {
-    random(minNum, maxNum) {
+    //生成随机字符串，长度为len,默认长度为4
+    randomStr(len =4){
+        return len > 10 ?  (this.randomStr(10) + this.randomStr(len-10)) : Math.random().toString(36).substr(2,len);
+     }
+     //生成指定范围的随机整数
+    randomNum(minNum, maxNum) {
         return Math.floor(Math.random() * (maxNum - minNum) + minNum);
     };
     trimString(val) {
